@@ -1,8 +1,8 @@
 import attr
-import telepot
 
-from util.chain import chained, not_none
-from util.lifespan import Lifespan
+import telepot
+from blabbermouth.util.chain import chained, not_none
+from blabbermouth.util.lifespan import Lifespan
 
 
 @attr.s(slots=True)

@@ -1,0 +1,11 @@
+tar-ignore = .eggs
+tar-ignore = .env
+tar-ignore = .env_pypy
+tar-ignore = .svn
+tar-ignore = .pybuild
+tar-ignore = .pypy
+tar-ignore = .tox
+tar-ignore = *.egg-info
+tar-ignore = build
+tar-ignore = dist
+tar-ignore = local-dist

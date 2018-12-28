@@ -1,7 +1,7 @@
 import attr
-import telepot
 
-from util.log import logged
+import telepot
+from blabbermouth.util.log import logged
 
 
 @attr.s(slots=True)

@@ -3,16 +3,14 @@ import asyncio
 import concurrent.futures
 import functools
 
-import aiohttp
 import attr
-import telepot
-from telepot.aio.loop import MessageLoop
 
-import bot_factory
-import chat_intelligence
-import intelligence_core_factory
-from mongo_knowledge_base import MongoKnowledgeBase
-from util import config, log
+import aiohttp
+import telepot
+from blabbermouth import bot_factory, chat_intelligence, intelligence_core_factory
+from blabbermouth.mongo_knowledge_base import MongoKnowledgeBase
+from blabbermouth.util import config, log
+from telepot.aio.loop import MessageLoop
 
 
 @attr.s(slots=True)
@@ -35,14 +33,14 @@ def parse_args():
     return parser.parse_args()
 
 
-async def main(event_loop):
+async def run_main(event_loop):
     args = parse_args()
     config_env_overrides = {
         "is_prod": not args.dev,
         "token": args.token,
         "yandex_dev_api_key": args.yandex_dev_api_key,
     }
-    conf = config.load_config("config", "env.yaml", config_env_overrides)
+    conf = config.load_config("/blabbermouth/config", "env.yaml", config_env_overrides)
 
     log.setup_logging(conf)
 
@@ -84,11 +82,7 @@ async def main(event_loop):
     await MessageLoop(bot_accessor()).run_forever()
 
 
-def run_main():
+def main():
     event_loop = asyncio.get_event_loop()
-    event_loop.create_task(main(event_loop))
+    event_loop.create_task(run_main(event_loop))
     event_loop.run_forever()
-
-
-if __name__ == "__main__":
-    run_main()

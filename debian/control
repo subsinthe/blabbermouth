@@ -1,0 +1,18 @@
+Source: blabbermouth
+Section: misc
+Priority: optional
+Maintainer: Vladimir Golubev <subsinthe@gmail.com>
+Build-Depends:
+    debhelper (>= 7),
+    python
+Standards-Version: 3.9.3
+X-Python3-Version: 3.7
+
+Package: blabbermouth
+Section: misc
+Priority: optional
+Architecture: all
+Depends:
+    python,
+Description: Chatting telegram bot powered by your talks and markov chains
+ Chatting telegram bot powered by your talks and markov chains

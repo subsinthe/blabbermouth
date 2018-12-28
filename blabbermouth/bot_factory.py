@@ -1,12 +1,9 @@
 import datetime
 
-import telepot
-from telepot.aio.delegate import per_chat_id, create_open, pave_event_space
-
-import chat_intelligence
-import chatter_handler
-import deaf_detector
 import learning_handler
+import telepot
+from blabbermouth import chat_intelligence, chatter_handler, deaf_detector
+from telepot.aio.delegate import create_open, pave_event_space, per_chat_id
 from util import query_detector
 
 

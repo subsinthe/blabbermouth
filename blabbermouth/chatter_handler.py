@@ -3,14 +3,13 @@ import functools
 import random
 
 import telepot
-
-from callback_query import CallbackQuery
-from markup import InlineButton
-from thought import text as thought_text
-from thought import Type as ThoughtType
-from util.chain import chained, check, not_none
-from util.log import logged
-from util.timer import Timer
+from blabbermouth.callback_query import CallbackQuery
+from blabbermouth.markup import InlineButton
+from blabbermouth.thought import Type as ThoughtType
+from blabbermouth.thought import text as thought_text
+from blabbermouth.util.chain import chained, check, not_none
+from blabbermouth.util.log import logged
+from blabbermouth.util.timer import Timer
 
 
 @logged

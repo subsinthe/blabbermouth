@@ -1,12 +1,12 @@
-import random
 import io
+import random
 
 import attr
 
-import thought
-from intelligence_core import IntelligenceCore
-from util.chain import chained, not_none
-from util.log import logged
+from blabbermouth import thought
+from blabbermouth.intelligence_core import IntelligenceCore
+from blabbermouth.util.chain import chained, not_none
+from blabbermouth.util.log import logged
 
 
 @logged

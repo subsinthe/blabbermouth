@@ -4,13 +4,13 @@ import functools
 import random
 
 import attr
-import markovify
 
-import thought
-from intelligence_core import IntelligenceCore
-from knowledge_base import KnowledgeBase
-from util.lifespan import Lifespan
-from util.log import logged
+import markovify
+from blabbermouth import thought
+from blabbermouth.intelligence_core import IntelligenceCore
+from blabbermouth.knowledge_base import KnowledgeBase
+from blabbermouth.util.lifespan import Lifespan
+from blabbermouth.util.log import logged
 
 
 async def _strip_dots(iterable):

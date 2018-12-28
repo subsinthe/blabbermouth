@@ -1,7 +1,7 @@
 import attr
-import motor.motor_asyncio
 
-from knowledge_base import KnowledgeBase
+import motor.motor_asyncio
+from blabbermouth.knowledge_base import KnowledgeBase
 
 
 @attr.s(slots=True)

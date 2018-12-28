@@ -2,8 +2,8 @@ import random
 
 import attr
 
-from intelligence_core import IntelligenceCore
-from util.log import logged
+from blabbermouth.intelligence_core import IntelligenceCore
+from blabbermouth.util.log import logged
 
 
 @logged

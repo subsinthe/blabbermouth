@@ -1,14 +1,13 @@
 import datetime
 
-from yandex_speech_client import Emotion as SpeechEmotion
-from yandex_speech_client import YandexSpeechClient
-
-from aggregating_intelligence_core import AggregatingIntelligenceCore
-from markov_chain_intelligence_core import MarkovChainIntelligenceCore
-from reddit_browser import RedditBrowser
-from reddit_browser import FeedSortType as RedditFeedSortType
-from reddit_chatter import RedditChatter
-from speaking_intelligence_core import SpeakingIntelligenceCore
+from blabbermouth.aggregating_intelligence_core import AggregatingIntelligenceCore
+from blabbermouth.markov_chain_intelligence_core import MarkovChainIntelligenceCore
+from blabbermouth.reddit_browser import FeedSortType as RedditFeedSortType
+from blabbermouth.reddit_browser import RedditBrowser
+from blabbermouth.reddit_chatter import RedditChatter
+from blabbermouth.speaking_intelligence_core import SpeakingIntelligenceCore
+from blabbermouth.yandex_speech_client import Emotion as SpeechEmotion
+from blabbermouth.yandex_speech_client import YandexSpeechClient
 
 
 def build(chat_id, event_loop, knowledge_base, http_session, user_agent, markov_chain_worker, conf):

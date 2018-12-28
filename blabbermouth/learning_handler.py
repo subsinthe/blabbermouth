@@ -1,7 +1,6 @@
 import telepot
-
-from knowledge_base import KnowledgeBase
-from util.log import logged
+from blabbermouth.knowledge_base import KnowledgeBase
+from blabbermouth.util.log import logged
 
 
 @logged

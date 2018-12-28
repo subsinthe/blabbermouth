@@ -1,0 +1,2 @@
+config /blabbermouth
+dist/*.whl  /blabbermouth/.wheels

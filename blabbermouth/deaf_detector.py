@@ -1,10 +1,10 @@
 import re
 
 import attr
-import telepot
 
-from util.chain import chained, check, not_none
-from util.log import logged
+import telepot
+from blabbermouth.util.chain import chained, check, not_none
+from blabbermouth.util.log import logged
 
 
 @logged

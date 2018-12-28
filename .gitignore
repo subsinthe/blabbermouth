@@ -1,4 +1,8 @@
+build/
+dist/
 .vimrc
 .env
+.tox
+*.egg-info
 *.swp
 __pycache__
