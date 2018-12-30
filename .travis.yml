@@ -7,7 +7,7 @@ env:
     - DIST=dist
 
 install:
-    - sudo apt-get install devscripts
+    - sudo apt-get install debhelper devscripts
     - pip install -r requirements.build.txt
     - pip install -r requirements.lint.txt
     - pip install -r requirements.install.txt
