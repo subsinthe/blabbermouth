@@ -1,0 +1,26 @@
+language: python
+
+python:
+    - '3.7'
+
+env:
+    - DIST=dist
+
+install:
+    - pip install -r requirements.build.txt
+    - pip install -r requirements.lint.txt
+    - pip install -r requirements.install.txt
+    - python setup.py bdist_wheel --dist-dir=${DIST}
+    - pip install --upgrade --ignore-installed --no-deps --find-links=${DIST}
+
+script:
+    - flake8
+    - black . --check
+
+deploy:
+    provider: releases
+    api_key:
+        secure: oEjwVcyyiNl/vQSjCM6oF6B1FrCxnMb6FAKdW3Izma52IZJu9UVcnFfE0R5tmfqlU+Qk2R4mvUxnCJLK9lZvlFJ0dGwNNOSYgKbe3qIgEn8746adR2AAzf9rU2EOe1k1kKIPiq8GF5TgcSou7vFlsMx475fClpzZJ4PGUI4DgkyseX3fE1HjdFXyFNdN0IG6AbDVUOAemnUVMCKQGNzsHpPjSYCwwTB6Lw6k/o6Rh8VQdcr6ZRUUQ7CazEysEEpK5KQc7qz9phMS++MSi+NU3Lfp/trc0E5aX8gP5L88BmFSt2/tBSxgrQQX/qmbDN6Thsqo/iYHr8iQAubU2dMWgXTGt2ppQgV9hrGaj20YE4Wps8Bl4WtaTeKEUbalglYME7sY7n8KGMkJGJS5k6AovZ47MD0UUG3PBdxMOCJK90MBXieXZlRIG3XKvqzaIXEVcYENykwx0lsfS2Za+mOYlGFutvNfrpkl67RNFOwIYVYp8PUrtOp9w4nuaNN5USC+pbImKj8dszmDdI5iOl8OdAl3vUjwVowYn5OeXxHsH03BmiE8VpQxc18HKtHnBFx1SwPvMytXucuRba+FNaAk8zPGygTGsTFYVpQCuN9nzwVfKb9R25nvTcjRQdTvkIZ6eU/saO4CfWvEcwrTqJwmCapMpFfnhvBSkzJx65VBJx8=
+    file: "${DIST}/*.whl"
+    on:
+        repo: subsinthe/blabbermouth
