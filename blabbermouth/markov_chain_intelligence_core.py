@@ -55,12 +55,7 @@ class CachedMarkovText:
         self._text_lifespan.reset()
 
     async def _build_text(self):
-        knowledge = ". ".join(
-            [
-                sentence async
-                for sentence in _strip_dots(self._knowledge_source())
-            ]
-        )
+        knowledge = ". ".join(list(_strip_dots(self._knowledge_source())))
         self._text = await self._event_loop.run_in_executor(
             self._worker, lambda: markovify.Text(knowledge)
         )

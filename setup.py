@@ -13,7 +13,9 @@ setup(
     version=version,
     author="Vladimir Golubev",
     author_email="subsinthe@gmail.ru",
-    description="Chatting telegram bot powered by your talks and markov chains",
+    description=(
+        "Chatting telegram bot powered by your talks and markov chains"
+    ),
     packages=find_packages(),
     include_package_data=True,
     zip_safe=True,

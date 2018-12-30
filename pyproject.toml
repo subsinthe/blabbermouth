@@ -3,6 +3,8 @@ exclude = '''
 /(
     \.tox
   | \.env
+  | build
+  | dist
 )/
 '''
 line-length=79

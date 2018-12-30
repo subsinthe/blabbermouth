@@ -1,10 +1,10 @@
 import datetime
 
 from blabbermouth.aggregating_intelligence_core import (
-    AggregatingIntelligenceCore
+    AggregatingIntelligenceCore,
 )
 from blabbermouth.markov_chain_intelligence_core import (
-    MarkovChainIntelligenceCore
+    MarkovChainIntelligenceCore,
 )
 from blabbermouth.reddit_browser import FeedSortType as RedditFeedSortType
 from blabbermouth.reddit_browser import RedditBrowser
