@@ -3,9 +3,13 @@ import datetime
 import telepot
 from telepot.aio.delegate import create_open, pave_event_space, per_chat_id
 
-import learning_handler
-from blabbermouth import chat_intelligence, chatter_handler, deaf_detector
-from util import query_detector
+from blabbermouth import (
+    chat_intelligence,
+    chatter_handler,
+    deaf_detector,
+    learning_handler,
+)
+from blabbermouth.util import query_detector
 
 
 def build(
