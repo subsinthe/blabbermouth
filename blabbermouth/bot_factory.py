@@ -1,9 +1,10 @@
 import datetime
 
-import learning_handler
 import telepot
-from blabbermouth import chat_intelligence, chatter_handler, deaf_detector
 from telepot.aio.delegate import create_open, pave_event_space, per_chat_id
+
+import learning_handler
+from blabbermouth import chat_intelligence, chatter_handler, deaf_detector
 from util import query_detector
 
 
@@ -21,7 +22,9 @@ def build(
         bot_token,
         [
             _make_per_chat_handler(
-                deaf_detector.DeafDetectorHandler, event_loop=event_loop, timeout=telepot_http_timeout
+                deaf_detector.DeafDetectorHandler,
+                event_loop=event_loop,
+                timeout=telepot_http_timeout,
             ),
             _make_per_chat_handler(
                 chat_intelligence.ChatIntelligence,
@@ -31,7 +34,9 @@ def build(
             _make_per_chat_handler(
                 learning_handler.LearningHandler,
                 knowledge_base=knowledge_base,
-                self_reference_detector=query_detector.self_reference_detector(bot_name),
+                self_reference_detector=query_detector.self_reference_detector(
+                    bot_name
+                ),
                 bot_name=bot_name,
                 event_loop=event_loop,
                 timeout=telepot_http_timeout,
@@ -41,13 +46,21 @@ def build(
                 event_loop=event_loop,
                 intelligence_registry=intelligence_registry,
                 bot_accessor=bot_accessor,
-                self_reference_detector=query_detector.self_reference_detector(bot_name),
-                personal_query_detector=query_detector.personal_query_detector(bot_name),
+                self_reference_detector=query_detector.self_reference_detector(
+                    bot_name
+                ),
+                personal_query_detector=query_detector.personal_query_detector(
+                    bot_name
+                ),
                 conceive_interval=datetime.timedelta(
                     hours=conf["chatter_handler"]["conceive_interval_hours"]
                 ),
-                callback_lifespan=datetime.timedelta(days=conf["chatter_handler"]["callback_lifespan_days"]),
-                answer_placeholder=conf["chatter_handler"]["answer_placeholder"],
+                callback_lifespan=datetime.timedelta(
+                    days=conf["chatter_handler"]["callback_lifespan_days"]
+                ),
+                answer_placeholder=conf["chatter_handler"][
+                    "answer_placeholder"
+                ],
                 timeout=telepot_http_timeout,
             ),
         ],

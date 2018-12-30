@@ -19,4 +19,7 @@ def text(text_data):
 
 
 def speech(text_data, speech_data):
-    return _Thought(thought_type=Type.SPEECH, payload={"text": text_data, "speech_data": speech_data})
+    return _Thought(
+        thought_type=Type.SPEECH,
+        payload={"text": text_data, "speech_data": speech_data},
+    )

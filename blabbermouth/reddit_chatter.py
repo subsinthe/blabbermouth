@@ -20,7 +20,9 @@ class RedditChatter(IntelligenceCore):
         sort_type = random.choice(self._sort_types)
 
         top_post = None
-        async for post in self._reddit_browser.lookup_top_posts(subreddit, sort_type, limit=1):
+        async for post in self._reddit_browser.lookup_top_posts(
+            subreddit, sort_type, limit=1
+        ):
             top_post = post
             break
         else:

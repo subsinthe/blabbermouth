@@ -1,11 +1,20 @@
 import telepot
+
 from blabbermouth.knowledge_base import KnowledgeBase
 from blabbermouth.util.log import logged
 
 
 @logged
 class LearningHandler(telepot.aio.helper.ChatHandler):
-    def __init__(self, *args, knowledge_base, self_reference_detector, bot_name, event_loop, **kwargs):
+    def __init__(
+        self,
+        *args,
+        knowledge_base,
+        self_reference_detector,
+        bot_name,
+        event_loop,
+        **kwargs
+    ):
         if not isinstance(knowledge_base, KnowledgeBase):
             raise TypeError("knowledge_base must be KnowledgeBase")
 
@@ -34,7 +43,9 @@ class LearningHandler(telepot.aio.helper.ChatHandler):
 
         chat_id = message["chat"]["id"]
 
-        await self._knowledge_base.record(chat_id=chat_id, user=user, text=text)
+        await self._knowledge_base.record(
+            chat_id=chat_id, user=user, text=text
+        )
 
     def on__idle(self, _):
         self._log.debug("Ignoring on__idle")

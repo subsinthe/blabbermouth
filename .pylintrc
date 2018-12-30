@@ -1,5 +1,2 @@
-[FORMAT]
-max-line-length = 110
-
 [MESSAGES CONTROL]
 disable=missing-docstring,too-few-public-methods,too-many-ancestors,bad-continuation,broad-except,eval-used,too-many-arguments,invalid-name

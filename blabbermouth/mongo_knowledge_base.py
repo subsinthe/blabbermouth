@@ -1,6 +1,6 @@
 import attr
-
 import motor.motor_asyncio
+
 from blabbermouth.knowledge_base import KnowledgeBase
 
 

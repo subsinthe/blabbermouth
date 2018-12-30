@@ -3,14 +3,18 @@ import asyncio
 import concurrent.futures
 import functools
 
-import attr
-
 import aiohttp
+import attr
 import telepot
-from blabbermouth import bot_factory, chat_intelligence, intelligence_core_factory
+from telepot.aio.loop import MessageLoop
+
+from blabbermouth import (
+    bot_factory,
+    chat_intelligence,
+    intelligence_core_factory,
+)
 from blabbermouth.mongo_knowledge_base import MongoKnowledgeBase
 from blabbermouth.util import config, log
-from telepot.aio.loop import MessageLoop
 
 
 @attr.s(slots=True)
@@ -40,7 +44,9 @@ async def run_main(event_loop):
         "token": args.token,
         "yandex_dev_api_key": args.yandex_dev_api_key,
     }
-    conf = config.load_config("/blabbermouth/config", "env.yaml", config_env_overrides)
+    conf = config.load_config(
+        "/blabbermouth/config", "env.yaml", config_env_overrides
+    )
 
     log.setup_logging(conf)
 
@@ -60,7 +66,9 @@ async def run_main(event_loop):
             knowledge_base=knowledge_base,
             http_session=aiohttp.ClientSession(),
             user_agent=conf["core"]["user_agent"],
-            markov_chain_worker=concurrent.futures.ThreadPoolExecutor(max_workers=5),
+            markov_chain_worker=concurrent.futures.ThreadPoolExecutor(
+                max_workers=5
+            ),
             conf=conf,
         )
     )

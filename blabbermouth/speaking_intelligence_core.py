@@ -12,7 +12,9 @@ from blabbermouth.util.log import logged
 @logged
 @attr.s(slots=True)
 class SpeakingIntelligenceCore(IntelligenceCore):
-    _text_core = attr.ib(validator=attr.validators.instance_of(IntelligenceCore))
+    _text_core = attr.ib(
+        validator=attr.validators.instance_of(IntelligenceCore)
+    )
     _speech_client = attr.ib()
     _voice = attr.ib()
     _lang = attr.ib()
@@ -21,12 +23,16 @@ class SpeakingIntelligenceCore(IntelligenceCore):
 
     @chained
     async def conceive(self):
-        return await self._make_voice(self._extract_text(not_none(await self._text_core.conceive())))
+        return await self._make_voice(
+            self._extract_text(not_none(await self._text_core.conceive()))
+        )
 
     @chained
     async def respond(self, user, message):
         return await self._make_voice(
-            self._extract_text(not_none(await self._text_core.respond(user, message)))
+            self._extract_text(
+                not_none(await self._text_core.respond(user, message))
+            )
         )
 
     async def _make_voice(self, text):
@@ -35,7 +41,11 @@ class SpeakingIntelligenceCore(IntelligenceCore):
         self._log.info("Using {} emotion".format(emotion))
 
         response = await self._speech_client.vocalize(
-            text=text, voice=self._voice, lang=self._lang, audio_format=self._audio_format, emotion=emotion
+            text=text,
+            voice=self._voice,
+            lang=self._lang,
+            audio_format=self._audio_format,
+            emotion=emotion,
         )
         return thought.speech(text_data=text, speech_data=io.BytesIO(response))
 
@@ -43,6 +53,8 @@ class SpeakingIntelligenceCore(IntelligenceCore):
     def _extract_text(core_response):
         if core_response.thought_type is not thought.Type.TEXT:
             raise ValueError(
-                "Wrapped core generated unexpected thought type: {}".format(core_response.thought_type)
+                "Wrapped core generated unexpected thought type: {}".format(
+                    core_response.thought_type
+                )
             )
         return core_response.payload

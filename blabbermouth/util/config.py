@@ -15,13 +15,16 @@ def load_config(config_directory, env_file, config_env_overrides=None):
         config_env[key] = value
 
     jinja_env = jinja2.Environment(
-        loader=jinja2.FileSystemLoader(config_directory), trim_blocks=True, lstrip_blocks=True
+        loader=jinja2.FileSystemLoader(config_directory),
+        trim_blocks=True,
+        lstrip_blocks=True,
     )
 
     sources = (
         entry
         for entry in os.listdir(config_directory)
-        if entry != env_file and os.path.isfile(os.path.join(config_directory, entry))
+        if entry != env_file
+        and os.path.isfile(os.path.join(config_directory, entry))
     )
 
     result = config_env.copy()

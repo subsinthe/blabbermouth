@@ -1,6 +1,6 @@
 import attr
-
 import telepot
+
 from blabbermouth.util.log import logged
 
 

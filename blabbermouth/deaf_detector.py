@@ -1,8 +1,8 @@
 import re
 
 import attr
-
 import telepot
+
 from blabbermouth.util.chain import chained, check, not_none
 from blabbermouth.util.log import logged
 
@@ -19,7 +19,10 @@ class PreviousMessageRetriever:
     _retrievers = attr.ib(default=None)
 
     def __attrs_post_init__(self):
-        self._retrievers = [self._try_retrieve_from_reply, self._try_infer_from_previous_message]
+        self._retrievers = [
+            self._try_retrieve_from_reply,
+            self._try_infer_from_previous_message,
+        ]
 
     def retrieve(self, message, text, user):
         for retriever in self._retrievers:
@@ -52,9 +55,17 @@ class PreviousMessageRetriever:
 @logged
 @attr.s(slots=True)
 class DeafDetector:
-    WHAT_REGEX = re.compile(r"^([ч|ш]т?[о|а|ё|е]|ч[е|и][г|в]о)(\s(блять|бля|нахуй))?\.?$", re.IGNORECASE)
+    WHAT_REGEX = re.compile(
+        r"^([ч|ш]т?[о|а|ё|е]|ч[е|и][г|в]о)(\s(блять|бля|нахуй))?\.?$",
+        re.IGNORECASE,
+    )
 
-    TO_THIRD_CONVERSION_MAP = {"я": "Он", "меня": "Его", "мне": "Ему", "мной": "Им"}
+    TO_THIRD_CONVERSION_MAP = {
+        "я": "Он",
+        "меня": "Его",
+        "мне": "Ему",
+        "мной": "Им",
+    }
 
     _previous_message_retriever = attr.ib(factory=PreviousMessageRetriever)
 
@@ -69,16 +80,25 @@ class DeafDetector:
             self._previous_message_retriever.record(text, user)
             return None
 
-        previous_message = not_none(self._previous_message_retriever.retrieve(message, text, user))
+        previous_message = not_none(
+            self._previous_message_retriever.retrieve(message, text, user)
+        )
 
         self._previous_message_retriever.clean()
 
-        return self._reply_to_deaf(previous_message.text, previous_message.user)
+        return self._reply_to_deaf(
+            previous_message.text, previous_message.user
+        )
 
     def _reply_to_deaf(self, previous_message, deaf_user):
         self._log.info("Replying to {}".format(deaf_user))
 
-        return " ".join([self._convert_to_third(word) for word in previous_message.split(" ")])
+        return " ".join(
+            [
+                self._convert_to_third(word)
+                for word in previous_message.split(" ")
+            ]
+        )
 
     def _convert_to_third(self, word):
         return self.TO_THIRD_CONVERSION_MAP.get(word.lower(), word)
@@ -100,7 +120,9 @@ class DeafDetectorHandler(telepot.aio.helper.ChatHandler):
     @chained
     async def _on_chat_message(self, message):
         answer = not_none(self._backend.try_reply(message))
-        await self.sender.sendMessage("_{}_".format(answer), parse_mode="Markdown")
+        await self.sender.sendMessage(
+            "_{}_".format(answer), parse_mode="Markdown"
+        )
 
     def on__idle(self, _):
         self._log.debug("Ignoring on__idle")

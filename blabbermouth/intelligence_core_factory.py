@@ -1,7 +1,11 @@
 import datetime
 
-from blabbermouth.aggregating_intelligence_core import AggregatingIntelligenceCore
-from blabbermouth.markov_chain_intelligence_core import MarkovChainIntelligenceCore
+from blabbermouth.aggregating_intelligence_core import (
+    AggregatingIntelligenceCore
+)
+from blabbermouth.markov_chain_intelligence_core import (
+    MarkovChainIntelligenceCore
+)
 from blabbermouth.reddit_browser import FeedSortType as RedditFeedSortType
 from blabbermouth.reddit_browser import RedditBrowser
 from blabbermouth.reddit_chatter import RedditChatter
@@ -10,16 +14,28 @@ from blabbermouth.yandex_speech_client import Emotion as SpeechEmotion
 from blabbermouth.yandex_speech_client import YandexSpeechClient
 
 
-def build(chat_id, event_loop, knowledge_base, http_session, user_agent, markov_chain_worker, conf):
+def build(
+    chat_id,
+    event_loop,
+    knowledge_base,
+    http_session,
+    user_agent,
+    markov_chain_worker,
+    conf,
+):
     markov_chain_core = MarkovChainIntelligenceCore.build(
         event_loop=event_loop,
         worker=markov_chain_worker,
         chat_id=chat_id,
         knowledge_base=knowledge_base,
         knowledge_lifespan=datetime.timedelta(
-            minutes=conf["markov_chain_intelligence_core"]["knowledge_lifespan_minutes"]
+            minutes=conf["markov_chain_intelligence_core"][
+                "knowledge_lifespan_minutes"
+            ]
         ),
-        make_sentence_attempts=conf["markov_chain_intelligence_core"]["make_sentence_attempts"],
+        make_sentence_attempts=conf["markov_chain_intelligence_core"][
+            "make_sentence_attempts"
+        ],
     )
     return AggregatingIntelligenceCore(
         cores=[
@@ -33,7 +49,9 @@ def build(chat_id, event_loop, knowledge_base, http_session, user_agent, markov_
                 ),
                 voice=conf["speaking_intelligence_core"]["voice"],
                 lang=conf["speaking_intelligence_core"]["lang"],
-                audio_format=conf["speaking_intelligence_core"]["audio_format"],
+                audio_format=conf["speaking_intelligence_core"][
+                    "audio_format"
+                ],
                 emotions=list(SpeechEmotion),
             ),
             RedditChatter(
@@ -43,8 +61,14 @@ def build(chat_id, event_loop, knowledge_base, http_session, user_agent, markov_
                     user_agent=user_agent,
                 ),
                 top_post_comments=conf["reddit_chatter"]["top_post_comments"],
-                subreddits_of_interest=conf["reddit_chatter"]["subreddits_of_interest"],
-                sort_types=[RedditFeedSortType.BEST, RedditFeedSortType.HOT, RedditFeedSortType.TOP],
+                subreddits_of_interest=conf["reddit_chatter"][
+                    "subreddits_of_interest"
+                ],
+                sort_types=[
+                    RedditFeedSortType.BEST,
+                    RedditFeedSortType.HOT,
+                    RedditFeedSortType.TOP,
+                ],
             ),
         ]
     )

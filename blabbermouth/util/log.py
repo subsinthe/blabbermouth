@@ -1,7 +1,6 @@
 import logging
 import logging.handlers
 
-
 _REGISTERED_LOGGERS = []
 
 
@@ -30,11 +29,15 @@ def setup_logging(conf):
         delay=logging_conf["file_handler"]["delay"],
     )
     file_handler.setFormatter(log_formatter)
-    file_handler.setLevel(name_to_log_level(logging_conf["file_handler"]["log_level"]))
+    file_handler.setLevel(
+        name_to_log_level(logging_conf["file_handler"]["log_level"])
+    )
 
     stream_handler = logging.StreamHandler()
     stream_handler.setFormatter(log_formatter)
-    stream_handler.setLevel(name_to_log_level(logging_conf["stream_handler"]["log_level"]))
+    stream_handler.setLevel(
+        name_to_log_level(logging_conf["stream_handler"]["log_level"])
+    )
 
     for logger in _REGISTERED_LOGGERS:
         logger.setLevel(logging.INFO)

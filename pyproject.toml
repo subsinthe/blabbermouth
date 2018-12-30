@@ -5,4 +5,4 @@ exclude = '''
   | \.env
 )/
 '''
-line-length = 110
+line-length=79

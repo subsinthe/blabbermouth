@@ -3,6 +3,7 @@ import functools
 import random
 
 import telepot
+
 from blabbermouth.callback_query import CallbackQuery
 from blabbermouth.markup import InlineButton
 from blabbermouth.thought import Type as ThoughtType
@@ -27,7 +28,9 @@ class ChatterHandler(telepot.aio.helper.ChatHandler):
         answer_placeholder,
         **kwargs
     ):
-        super(ChatterHandler, self).__init__(*args, include_callback_query=True, **kwargs)
+        super(ChatterHandler, self).__init__(
+            *args, include_callback_query=True, **kwargs
+        )
 
         self._event_loop = event_loop
         self._intelligence_registry = intelligence_registry
@@ -35,10 +38,15 @@ class ChatterHandler(telepot.aio.helper.ChatHandler):
         self._self_reference_detector = self_reference_detector
         self._personal_quary_detector = personal_query_detector
         self._conceive_interval = conceive_interval
-        self._conceive_timer = Timer(callback=self._conceive, interval=self._randomize_conceive_interval())
+        self._conceive_timer = Timer(
+            callback=self._conceive,
+            interval=self._randomize_conceive_interval(),
+        )
         self._answer_placeholder = thought_text(answer_placeholder)
 
-        self._callback_query = CallbackQuery(callback_lifespan=callback_lifespan)
+        self._callback_query = CallbackQuery(
+            callback_lifespan=callback_lifespan
+        )
         self.on_callback_query = self._callback_query.on_callback_query
 
         self._log.info("Created {}".format(id(self)))
@@ -52,11 +60,15 @@ class ChatterHandler(telepot.aio.helper.ChatHandler):
         source = not_none(message.get("from"))
         user = not_none(source.get("username"))
 
-        self._log.info("User {} in chat {} is talking to me".format(user, self.chat_id))
+        self._log.info(
+            "User {} in chat {} is talking to me".format(user, self.chat_id)
+        )
 
         intelligence_core = self._intelligence_registry.get_core(self.chat_id)
 
-        answer = await intelligence_core.respond(user=user, message=message.get("text", ""))
+        answer = await intelligence_core.respond(
+            user=user, message=message.get("text", "")
+        )
         if answer is None:
             self._log.info('Got "None" answer from intelligence core')
             answer = self._answer_placeholder
@@ -79,7 +91,9 @@ class ChatterHandler(telepot.aio.helper.ChatHandler):
         self._conceive_timer.interval = self._randomize_conceive_interval()
 
     def _randomize_conceive_interval(self):
-        return datetime.timedelta(seconds=random.uniform(0, self._conceive_interval.total_seconds()))
+        return datetime.timedelta(
+            seconds=random.uniform(0, self._conceive_interval.total_seconds())
+        )
 
     async def _send_thought(self, thought):
         if thought.thought_type == ThoughtType.TEXT:
@@ -91,13 +105,18 @@ class ChatterHandler(telepot.aio.helper.ChatHandler):
                     text="Read",
                     callback_data=self._callback_query.register_handler(
                         functools.partial(
-                            self._read_voice_message_handler, voice_text=thought.payload["text"]
+                            self._read_voice_message_handler,
+                            voice_text=thought.payload["text"],
                         )
                     ),
                 ),
             )
         else:
-            raise ValueError("Unexpected thought type: {}".format(thought.thought_type))
+            raise ValueError(
+                "Unexpected thought type: {}".format(thought.thought_type)
+            )
 
     async def _read_voice_message_handler(self, query_id, voice_text):
-        await self._bot_accessor().answerCallbackQuery(query_id, text=voice_text, show_alert=True)
+        await self._bot_accessor().answerCallbackQuery(
+            query_id, text=voice_text, show_alert=True
+        )

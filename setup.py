@@ -17,6 +17,8 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=True,
-    entry_points={"console_scripts": ["blabbermouth = blabbermouth.main:main"]},
+    entry_points={
+        "console_scripts": ["blabbermouth = blabbermouth.main:main"]
+    },
     install_requires=install_requires,
 )

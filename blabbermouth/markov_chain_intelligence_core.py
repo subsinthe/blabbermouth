@@ -4,8 +4,8 @@ import functools
 import random
 
 import attr
-
 import markovify
+
 from blabbermouth import thought
 from blabbermouth.intelligence_core import IntelligenceCore
 from blabbermouth.knowledge_base import KnowledgeBase
@@ -55,8 +55,15 @@ class CachedMarkovText:
         self._text_lifespan.reset()
 
     async def _build_text(self):
-        knowledge = ". ".join([sentence async for sentence in _strip_dots(self._knowledge_source())])
-        self._text = await self._event_loop.run_in_executor(self._worker, lambda: markovify.Text(knowledge))
+        knowledge = ". ".join(
+            [
+                sentence async
+                for sentence in _strip_dots(self._knowledge_source())
+            ]
+        )
+        self._text = await self._event_loop.run_in_executor(
+            self._worker, lambda: markovify.Text(knowledge)
+        )
         self._log.info("Successfully built new text")
 
     @contextlib.contextmanager
@@ -65,7 +72,9 @@ class CachedMarkovText:
         try:
             yield
         except Exception as ex:
-            self._log.error("[CachedMarkovText] Failed to build sentence: {}".format(ex))
+            self._log.error(
+                "[CachedMarkovText] Failed to build sentence: {}".format(ex)
+            )
         finally:
             self._sentence_is_building = False
 
@@ -73,7 +82,8 @@ class CachedMarkovText:
         text = self._text
         make_sentence_attempts = self._make_sentence_attempts
         return await self._event_loop.run_in_executor(
-            self._worker, lambda: text.make_sentence(tries=make_sentence_attempts)
+            self._worker,
+            lambda: text.make_sentence(tries=make_sentence_attempts),
         )
 
 
@@ -85,12 +95,22 @@ class MarkovChainIntelligenceCore(IntelligenceCore):
         BY_CURRENT_USER = enum.auto()
         BY_FULL_KNOWLEDGE = enum.auto()
 
-    _knowledge_base = attr.ib(validator=attr.validators.instance_of(KnowledgeBase))
+    _knowledge_base = attr.ib(
+        validator=attr.validators.instance_of(KnowledgeBase)
+    )
     _text_constructor = attr.ib()
     _markov_texts = attr.ib()
 
     @classmethod
-    def build(cls, event_loop, worker, chat_id, knowledge_base, knowledge_lifespan, make_sentence_attempts):
+    def build(
+        cls,
+        event_loop,
+        worker,
+        chat_id,
+        knowledge_base,
+        knowledge_lifespan,
+        make_sentence_attempts,
+    ):
         text_constructor = functools.partial(
             CachedMarkovText,
             event_loop=event_loop,
@@ -103,7 +123,9 @@ class MarkovChainIntelligenceCore(IntelligenceCore):
             text_constructor=text_constructor,
             markov_texts={
                 cls.Strategy.BY_CURRENT_CHAT: text_constructor(
-                    knowledge_source=functools.partial(knowledge_base.select_by_chat, chat_id)
+                    knowledge_source=functools.partial(
+                        knowledge_base.select_by_chat, chat_id
+                    )
                 ),
                 cls.Strategy.BY_FULL_KNOWLEDGE: text_constructor(
                     knowledge_source=knowledge_base.select_by_full_knowledge
@@ -113,7 +135,10 @@ class MarkovChainIntelligenceCore(IntelligenceCore):
 
     async def conceive(self):
         response = await self._form_message(
-            strategies=[self.Strategy.BY_CURRENT_CHAT, self.Strategy.BY_FULL_KNOWLEDGE]
+            strategies=[
+                self.Strategy.BY_CURRENT_CHAT,
+                self.Strategy.BY_FULL_KNOWLEDGE,
+            ]
         )
         return thought.text(response) if response is not None else None
 
@@ -134,7 +159,9 @@ class MarkovChainIntelligenceCore(IntelligenceCore):
             text_key = (strategy, user)
             if text_key not in self._markov_texts:
                 self._markov_texts[text_key] = self._text_constructor(
-                    knowledge_source=functools.partial(self._knowledge_base.select_by_user, user)
+                    knowledge_source=functools.partial(
+                        self._knowledge_base.select_by_user, user
+                    )
                 )
         else:
             text_key = strategy
