@@ -20,6 +20,19 @@ async def _strip_dots(iterable):
         yield entry
 
 
+async def _async_join(iterable, sep):
+    sep = sep.encode("utf-8")
+    b = bytearray()
+    try:
+        b += (await iterable.__anext__()).encode("utf-8")
+    except StopAsyncIteration:
+        return ""
+    async for s in iterable:
+        b += sep
+        b += s.encode("utf-8")
+    return b.decode("utf-8")
+
+
 @logged
 @attr.s(slots=True)
 class CachedMarkovText:
@@ -55,7 +68,9 @@ class CachedMarkovText:
         self._text_lifespan.reset()
 
     async def _build_text(self):
-        knowledge = ". ".join(list(_strip_dots(self._knowledge_source())))
+        knowledge = _async_join(
+            _strip_dots(self._knowledge_source()), sep=". "
+        )
         self._text = await self._event_loop.run_in_executor(
             self._worker, lambda: markovify.Text(knowledge)
         )
