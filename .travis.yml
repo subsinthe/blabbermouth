@@ -15,7 +15,7 @@ install:
 
 script:
     - flake8
-    - black . --check
+    # - black . --check
 
 deploy:
     provider: releases
