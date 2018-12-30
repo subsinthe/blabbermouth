@@ -29,16 +29,7 @@ class BotAccessor:
         return self._bot
 
 
-def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--token", required=True)
-    parser.add_argument("--yandex-dev-api-key", required=True)
-    parser.add_argument("--dev", action="store_true")
-    return parser.parse_args()
-
-
-async def run_main(event_loop):
-    args = parse_args()
+async def run(args, event_loop):
     config_env_overrides = {
         "is_prod": not args.dev,
         "token": args.token,
@@ -92,5 +83,13 @@ async def run_main(event_loop):
 
 def main():
     event_loop = asyncio.get_event_loop()
-    event_loop.create_task(run_main(event_loop))
+    event_loop.create_task(run(parse_args(), event_loop))
     event_loop.run_forever()
+
+
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--token", required=True)
+    parser.add_argument("--yandex-dev-api-key", required=True)
+    parser.add_argument("--dev", action="store_true")
+    return parser.parse_args()
