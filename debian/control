@@ -1,4 +1,4 @@
-Source: blabbermouth
+Source: python-blabbermouth
 Section: misc
 Priority: optional
 Maintainer: Vladimir Golubev <subsinthe@gmail.com>
@@ -8,7 +8,7 @@ Build-Depends:
 Standards-Version: 3.9.3
 X-Python3-Version: 3.7
 
-Package: blabbermouth
+Package: python-blabbermouth
 Section: misc
 Priority: optional
 Architecture: all
