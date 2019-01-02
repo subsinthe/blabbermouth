@@ -12,7 +12,7 @@ setup(
     name=name,
     version=version,
     author="Vladimir Golubev",
-    author_email="subsinthe@gmail.ru",
+    author_email="subsinthe@gmail.com",
     description=(
         "Chatting telegram bot powered by your talks and markov chains"
     ),
