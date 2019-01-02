@@ -1,7 +1,7 @@
 format: '[%(asctime)s] [%(levelname)s] [%(name)s] %(message)s'
 
 file_handler:
-    file_name: .blabbermouth-log
+    file_name: /blabbermouth/logs/blabbermouth.log
     limit_megabytes: 5
     backup_count: 2
     delay: 0
