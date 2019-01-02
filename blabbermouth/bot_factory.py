@@ -22,7 +22,7 @@ def build(
     telepot_http_timeout,
     conf,
 ):
-    telepot.aio.DelegatorBot(
+    return telepot.aio.DelegatorBot(
         bot_token,
         [
             _make_per_chat_handler(
