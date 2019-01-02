@@ -68,7 +68,7 @@ class CachedMarkovText:
         self._text_lifespan.reset()
 
     async def _build_text(self):
-        knowledge = _async_join(
+        knowledge = await _async_join(
             _strip_dots(self._knowledge_source()), sep=". "
         )
         self._text = await self._event_loop.run_in_executor(
