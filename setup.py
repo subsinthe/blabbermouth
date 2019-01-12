@@ -3,7 +3,7 @@
 from setuptools import find_packages, setup
 
 name = "blabbermouth"
-version = "1.1"
+version = "1.6-0"
 
 with open("requirements.install.txt", "rt") as f:
     install_requires = f.read()

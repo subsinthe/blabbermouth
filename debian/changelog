@@ -1,3 +1,9 @@
+python-blabbermouth (1.6-0) unstable; urgency=medium
+
+  * Use real versions
+
+ -- Vladimir Golubev <subsinthe@gmail.com>  Sat, 12 Jan 2019 18:56:46 +0300
+
 python-blabbermouth (1.2) unstable; urgency=medium
 
   * Migrate to new python
