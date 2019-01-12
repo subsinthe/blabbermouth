@@ -44,7 +44,7 @@ def build(
                 text_core=markov_chain_core,
                 speech_client=YandexSpeechClient(
                     http_session=http_session,
-                    api_key=conf["yandex_dev_api_key"],
+                    api_key=conf["yandex_cloud_token"],
                     api_url=conf["yandex_speech_client"]["api_url"],
                 ),
                 voice=conf["speaking_intelligence_core"]["voice"],
