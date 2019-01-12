@@ -6,7 +6,7 @@ Build-Depends:
     debhelper (>= 7),
     python
 Standards-Version: 3.9.3
-X-Python3-Version: 3.6
+X-Python3-Version: 3.7
 
 Package: python-blabbermouth
 Section: misc

@@ -1,3 +1,9 @@
+python-blabbermouth (1.2) unstable; urgency=medium
+
+  * Migrate to new python
+
+ -- Vladimir Golubev <subsinthe@gmail.com>  Sat, 12 Jan 2019 18:52:55 +0300
+
 python-blabbermouth (1.1) unstable; urgency=medium
 
   * Bump version
