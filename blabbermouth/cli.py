@@ -32,8 +32,8 @@ class BotAccessor:
 async def run(args, event_loop):
     config_env_overrides = {
         "is_prod": not args.dev,
-        "token": args.token,
-        "yandex_dev_api_key": args.yandex_dev_api_key,
+        "telegram_token": args.telegram_token,
+        "yandex_cloud_token": args.yandex_cloud_token,
     }
     conf = config.load_config(
         "/blabbermouth/config", "env.yaml", config_env_overrides
@@ -67,7 +67,7 @@ async def run(args, event_loop):
     bot_accessor = BotAccessor()
     bot_accessor.set(
         bot_factory.build(
-            bot_token=conf["token"],
+            bot_token=conf["telegram_token"],
             bot_name=conf["bot_name"],
             bot_accessor=bot_accessor,
             event_loop=event_loop,
@@ -89,7 +89,7 @@ def main():
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--token", required=True)
-    parser.add_argument("--yandex-dev-api-key", required=True)
+    parser.add_argument("--telegram-token", required=True)
+    parser.add_argument("--yandex-cloud-token", required=True)
     parser.add_argument("--dev", action="store_true")
     return parser.parse_args()
