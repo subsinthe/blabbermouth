@@ -15,7 +15,7 @@ install:
     - poetry install
 
 script:
-    - sudo debuild --no-tgz-check -us -uc
+    - debuild --no-tgz-check -us -uc
 
 deploy:
     provider: releases
