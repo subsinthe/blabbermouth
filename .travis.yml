@@ -27,4 +27,3 @@ deploy:
     on:
         repo: subsinthe/blabbermouth
         branch: master
-        tags: true
