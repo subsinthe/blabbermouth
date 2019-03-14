@@ -4,17 +4,17 @@ python:
     - '3.7-dev'
 
 env:
-    - DIST=dist
+    - DIST=pip-wheel-metadata
 
 install:
-    - sudo apt-get install debhelper devscripts
+    - sudo apt-get install python-tox debhelper devscripts
     - pip install poetry
     - poetry build
     - poetry install
-    - debuild --no-tgz-check -us -uc
 
 script:
     - tox
+    - debuild --no-tgz-check -us -uc
 
 deploy:
     provider: releases
