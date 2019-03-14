@@ -1,3 +1,9 @@
+python-blabbermouth (1.7) unstable; urgency=medium
+
+  * Move configuration to separate package
+
+ -- Vladimir Golubev <subsinthe@gmail.com>  Thu, 14 Mar 2019 21:17:51 +0000
+
 python-blabbermouth (1.6) unstable; urgency=medium
 
   * Use real versions
