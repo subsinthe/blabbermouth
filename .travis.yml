@@ -9,7 +9,7 @@ env:
     - DIST=pip-wheel-metadata
 
 install:
-    - sudo apt-get install debhelper devscripts
+    - sudo apt-get install debhelper devscripts fakeroot
     - pip install poetry
     - poetry build
     - poetry install
