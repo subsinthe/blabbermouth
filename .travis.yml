@@ -7,7 +7,7 @@ env:
     - DIST=pip-wheel-metadata
 
 install:
-    - sudo apt-get install tox debhelper devscripts
+    - sudo apt-get install debhelper devscripts
     - pip install poetry
     - poetry build
     - poetry install
