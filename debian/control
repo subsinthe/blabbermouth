@@ -3,8 +3,8 @@ Section: misc
 Priority: optional
 Maintainer: Vladimir Golubev <subsinthe@gmail.com>
 Build-Depends:
-    debhelper (>= 7),
-    python
+    debhelper (>= 9),
+    python,
 Standards-Version: 3.9.3
 X-Python3-Version: 3.7
 
