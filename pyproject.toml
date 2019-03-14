@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "blabbermouth"
-version = "1.6-0"
+version = "1.6-1"
 description = "Chatting telegram bot powered by your talks and markov chains"
 authors = [
     "Vladimir Golubev <subsinthe@gmail.com>"
