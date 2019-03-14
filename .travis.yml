@@ -1,5 +1,3 @@
-dist: xenial
-
 language: python
 
 python:
@@ -15,7 +13,6 @@ install:
     - poetry install
 
 script:
-    - tox
     - debuild --no-tgz-check -us -uc
 
 deploy:
