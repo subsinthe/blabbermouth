@@ -8,15 +8,13 @@ env:
 
 install:
     - sudo apt-get install debhelper devscripts
-    - pip install -r requirements.build.txt
-    - pip install -r requirements.lint.txt
-    - pip install -r requirements.install.txt
-    - python setup.py bdist_wheel --dist-dir=${DIST}
-    - pip install --upgrade --ignore-installed --no-deps --find-links=${DIST}
+    - pip install poetry
+    - poetry build
+    - poetry install
     - debuild --no-tgz-check -us -uc
 
 script:
-    - flake8
+    - tox
 
 deploy:
     provider: releases

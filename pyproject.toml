@@ -1,3 +1,35 @@
+[tool.poetry]
+name = "blabbermouth"
+version = "1.6-0"
+description = "Chatting telegram bot powered by your talks and markov chains"
+authors = [
+    "Vladimir Golubev <subsinthe@gmail.com>"
+]
+readme = 'README.md'
+repository = "https://github.com/subsinthe/blabbermouth"
+homepage = "https://github.com/subsinthe/blabbermouth"
+keywords = ['blabbermouth']
+
+[tool.poetry.dependencies]
+python = "^3.7"
+attrs = "^19.1.0"
+jinja2 = "^2.10"
+markovify = "^0.7.1"
+motor = "^2.0.0"
+pyyaml = "^5.1"
+telepot = "^12.7"
+
+[tool.poetry.dev-dependencies]
+black = "^18.9b0"
+flake8 = "^3.6.0"
+isort = "^4.3.4"
+pylint = "^2.2.2"
+python-language-server = "^0.21.4"
+vulture = "^1.0"
+
+[tool.poetry.scripts]
+blabbermouth = 'blabbermouth.cli:main'
+
 [tool.black]
 exclude = '''
 /(
@@ -8,3 +40,7 @@ exclude = '''
 )/
 '''
 line-length=79
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
