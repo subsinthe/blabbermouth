@@ -1,3 +1,0 @@
-conceive_interval_hours: 24
-callback_lifespan_days: 1
-answer_placeholder: {% if is_prod %} Лол {% else %} <None> {% endif %}

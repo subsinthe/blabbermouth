@@ -14,5 +14,6 @@ Priority: optional
 Architecture: all
 Depends:
     python,
+    python-blabbermouth-config,
 Description: Chatting telegram bot powered by your talks and markov chains
  Chatting telegram bot powered by your talks and markov chains

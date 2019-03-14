@@ -1,5 +1,0 @@
-db_host: localhost
-db_port: {% if is_prod %} 27018 {% else %} 27017 {% endif %}
-
-db_name: blabbermouth_knowledge_base
-db_collection: telegram_chat_source
