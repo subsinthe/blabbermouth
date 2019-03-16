@@ -98,10 +98,10 @@ class DeafDetector:
         )
 
         return " ".join(
-            [
+            (
                 self._convert_to_third(word)
                 for word in previous_message.split(" ")
-            ]
+            )
         )
 
     def _convert_to_third(self, word):
