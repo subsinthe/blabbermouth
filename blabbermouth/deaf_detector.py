@@ -87,11 +87,15 @@ class DeafDetector:
         self._previous_message_retriever.clean()
 
         return self._reply_to_deaf(
-            previous_message.text, previous_message.user
+            previous_message.text,
+            original_user=previous_message.user,
+            deaf_user=user,
         )
 
-    def _reply_to_deaf(self, previous_message, deaf_user):
-        self._log.info("Replying to {}".format(deaf_user))
+    def _reply_to_deaf(self, previous_message, original_user, deaf_user):
+        self._log.info(
+            f"Replying to {deaf_user} to message from {original_user}"
+        )
 
         return " ".join(
             [
