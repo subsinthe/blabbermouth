@@ -87,17 +87,21 @@ class DeafDetector:
         self._previous_message_retriever.clean()
 
         return self._reply_to_deaf(
-            previous_message.text, previous_message.user
+            previous_message.text,
+            original_user=previous_message.user,
+            deaf_user=user,
         )
 
-    def _reply_to_deaf(self, previous_message, deaf_user):
-        self._log.info("Replying to {}".format(deaf_user))
+    def _reply_to_deaf(self, previous_message, original_user, deaf_user):
+        self._log.info(
+            f"Replying to {deaf_user} to message from {original_user}"
+        )
 
         return " ".join(
-            [
+            (
                 self._convert_to_third(word)
                 for word in previous_message.split(" ")
-            ]
+            )
         )
 
     def _convert_to_third(self, word):
@@ -121,7 +125,7 @@ class DeafDetectorHandler(telepot.aio.helper.ChatHandler):
     async def _on_chat_message(self, message):
         answer = not_none(self._backend.try_reply(message))
         await self.sender.sendMessage(
-            "_{}_".format(answer), parse_mode="Markdown"
+            answer, reply_to_message_id=message["message_id"]
         )
 
     def on__idle(self, _):
