@@ -125,9 +125,7 @@ class DeafDetectorHandler(telepot.aio.helper.ChatHandler):
     async def _on_chat_message(self, message):
         answer = not_none(self._backend.try_reply(message))
         await self.sender.sendMessage(
-            "_{}_".format(answer),
-            parse_mode="Markdown",
-            reply_to_message_id=message["message_id"],
+            answer, reply_to_message_id=message["message_id"]
         )
 
     def on__idle(self, _):
