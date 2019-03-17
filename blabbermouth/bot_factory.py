@@ -7,6 +7,7 @@ from blabbermouth import (
     chat_intelligence,
     chatter_handler,
     deaf_detector,
+    intentional_replier,
     learning_handler,
 )
 from blabbermouth.util import query_detector
@@ -25,6 +26,13 @@ def build(
     return telepot.aio.DelegatorBot(
         bot_token,
         [
+            _make_per_chat_handler(
+                intentional_replier.IntentionalReplierHandler,
+                event_loop=event_loop,
+                intelligence_registry=intelligence_registry,
+                reply_chance=conf["intentional_replier"]["reply_chance"],
+                timeout=telepot_http_timeout,
+            ),
             _make_per_chat_handler(
                 deaf_detector.DeafDetectorHandler,
                 event_loop=event_loop,
