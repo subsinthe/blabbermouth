@@ -2,20 +2,18 @@
 name = "blabbermouth"
 version = "1.6-1"
 description = "Chatting telegram bot powered by your talks and markov chains"
-authors = [
-    "Vladimir Golubev <subsinthe@gmail.com>"
-]
-readme = 'README.md'
+authors = ["Vladimir Golubev <subsinthe@gmail.com>"]
+readme = "README.md"
 repository = "https://github.com/subsinthe/blabbermouth"
 homepage = "https://github.com/subsinthe/blabbermouth"
-keywords = ['blabbermouth']
+keywords = ["blabbermouth"]
 
 [tool.poetry.dependencies]
-python = "^3.7"
 attrs = "^19.1.0"
 jinja2 = "^2.10"
 markovify = "^0.7.1"
 motor = "^2.0.0"
+python = "^3.7"
 pyyaml = "^5.1"
 telepot = "^12.7"
 
@@ -28,7 +26,7 @@ python-language-server = "^0.21.4"
 vulture = "^1.0"
 
 [tool.poetry.scripts]
-blabbermouth = 'blabbermouth.cli:main'
+blabbermouth = "blabbermouth.cli:main"
 
 [tool.black]
 exclude = '''
