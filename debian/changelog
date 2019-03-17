@@ -1,3 +1,9 @@
+python-blabbermouth (1.9) unstable; urgency=medium
+
+  * Introduce intentional replier
+
+ -- Vladimir Golubev <subsinthe@gmail.com>  Sun, 17 Mar 2019 12:53:19 +0000
+
 python-blabbermouth (1.8) unstable; urgency=medium
 
   * Migrate to poetry
